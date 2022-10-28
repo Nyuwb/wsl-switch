@@ -1,19 +1,21 @@
 # WSL Switch
 
-Permet de switch l'activation de certains services d'une instance WSL à une autre.
+Allows you to switch the activation of certain services from one WSL instance to another.
 
-Afin de faciliter son exécution, stockez l'ensemble dans `%USERPROFILE%\home\scripts\wsl-switch\`.
-
-Les services suivants sont gérés :
+The following services are managed :
 
 - apache
 - mysql
 - php
 
-Il est nécessaire, de modifier le contneu du fichier `config.ps1` afin que cela corresponde
+## Configuration
 
-Ensuite, pour la première initialisation, il vous faudra exécuter le fichier `init.ps1` afin de générer la liste des alias et de créer l'alias principal. 
-En effet, Powershell ne permet pas de créer des alias avec des paramètres.
+Before anything else, you'll need to edit the content of the `config.ps1` file.
+
+By default, we're using the name of two Ubuntu instances, but the `key` can be the word you wants.
+The `hostname` should be the name of the distribution name on WSL.
+
+Then, you'll need to execute the `setup.ps1` file to generate all the aliases and to make the configuration working.
 
 Ensuite, il faudra inclure ce fichier de profil dans Powershell afin que les alias soient reconnus :
 
@@ -22,7 +24,19 @@ $env:USERPROFILE\home\scripts\wsl-switch\init.ps1
 . $Profile
 ```
 
-Les alias suivants seront créés :
+## Run
+
+To enable the service `$service` on `hostname`, you'll need to type the following command :
+
+```
+switch-wsl $service $hostname
+```
+
+To make it easier to use, a list of aliases are created and is available below.
+
+## Alias list
+
+Because of Powershell, we cannot create easy aliases like with Bash (Powershell don't accept arguments).
 
 - switch-apache : `switch-wsl apache`
 - switch-mysql : `switch-wsl mysql`
@@ -32,11 +46,4 @@ Les alias suivants seront créés :
 - switch-mysql-php : `switch-wsl mysql,php`
 - switch-all : `switch-wsl apache,mysql,php`
 
-Ces fonctions seront sauvegardés dans votre profil Powershell `$PROFILE`.  
-Ensuite, il vous suffira d'appeler le script comme suit :
-
-```
-switch-wsl $service $hostname
-```
-
-Cela activera les services sur le nom d'hôte précisé et les désactivera sur l'autre hôte.
+Any alias is linked to a function stored in your Powershell profile in : `$PROFILE`.  

@@ -18,7 +18,8 @@ Function ExecuteCommand
 }
 
 # Sortie standard colorisée
-Function WriteOutputColor {
+Function WriteOutputColor 
+{
 	Param (
 		[Parameter(Mandatory)] [String] $Message,
 		[Parameter(Mandatory)] [String] $Color
@@ -27,6 +28,6 @@ Function WriteOutputColor {
 
 	# Envoi du message
 	$Host.UI.RawUI.ForegroundColor = $Color
-	Write-Output ('Le service '+ $Service +' a bien été '+ $(If ($Action -eq 'stop') { 'stoppé' } else { 'démarré' }))
+	Write-Output $Message
 	$Host.UI.RawUI.ForegroundColor = $DefaultColor
 }
