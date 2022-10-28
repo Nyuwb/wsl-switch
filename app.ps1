@@ -1,6 +1,5 @@
-# Inclusion des fichiers nécessaires
-. $PSScriptRoot\config.ps1
-. $PSScriptRoot\functions.ps1
+Using Module "..\src\Config\Loader.psm1"
+Using Module "..\src\Utils\Console.psm1"
 
 # Configuration des services
 $AppConfig = @{
