@@ -1,0 +1,16 @@
+# Routes de FournisseurController
+instances:
+  trusty:
+    hostname: trusty
+    services:
+      apache: apache2
+      mysql: mysql
+      php: php5-fpm
+  focal:
+    hostname: trusty
+    services:
+      apache: apache2
+      mysql: mysql
+      php: php7.4-fpm
+path: D:\Développement\wsl-switch\
+config_file: D:\Développement\wsl-switch\config\config.ps1

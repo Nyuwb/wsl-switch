@@ -8,19 +8,24 @@ The following services are managed :
 - mysql
 - php
 
+## Requirements
+
+```
+Install-Module Powershell-YAML
+```
+
 ## Configuration
 
-Before anything else, you'll need to edit the content of the `config.ps1` file.
+Before anything else, you'll need to edit the content of the `config.yaml` file.
 
 By default, we're using the name of two Ubuntu instances, but the `key` can be the word you wants.
 The `hostname` should be the name of the distribution name on WSL.
 
-Then, you'll need to execute the `setup.ps1` file to generate all the aliases and to make the configuration working.
-
-Ensuite, il faudra inclure ce fichier de profil dans Powershell afin que les alias soient reconnus :
+Then, you'll need to execute the `installer.ps1` file to generate all the aliases and to make the configuration working.
+After that, you'll need to include your `$Profile` file as he's now storing all aliases and functions for this application.
 
 ```
-$env:USERPROFILE\home\scripts\wsl-switch\init.ps1
+path_to\wsl-switch\config\installer.ps1
 . $Profile
 ```
 
@@ -46,4 +51,4 @@ Because of Powershell, we cannot create easy aliases like with Bash (Powershell 
 - switch-mysql-php : `switch-wsl mysql,php`
 - switch-all : `switch-wsl apache,mysql,php`
 
-Any alias is linked to a function stored in your Powershell profile in : `$PROFILE`.  
+Every alias is linked to a function stored in your Powershell profile in : `$Profile`.  

@@ -1,3 +1,5 @@
+#WSLSwitch
+Set-Alias switch-wsl D:\Développement\wsl-switch\\app.ps1
 Function WSLSwitchApache { switch-wsl apache $args }
 Set-Alias switch-apache WSLSwitchApache
 Function WSLSwitchMysql { switch-wsl mysql $args }
@@ -12,3 +14,4 @@ Function WSLSwitchMysqlPhp { switch-wsl mysql,php $args }
 Set-Alias switch-mysql-php WSLSwitchMysqlPhp
 Function WSLSwitchAll { switch-wsl apache,mysql,php $args }
 Set-Alias switch-all WSLSwitchAll
+#WSLSwitchEnd
