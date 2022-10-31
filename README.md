@@ -26,7 +26,7 @@ By default for the `instances`, we're using the same value as the hostname, but 
 The `hostname` parameter should be the name of the distribution name on WSL.
 
 Then, you'll need to execute the `installer.ps1` file to generate all the aliases and to make the configuration working.
-After that, you'll need to include your `$Profile` file as he will store all aliases and functions for this application.
+After that, you'll need to include your `$Profile` file as it stores all aliases and functions for this application.
 
 ```
 path_to\wsl-switch\config\installer.ps1
@@ -35,7 +35,7 @@ path_to\wsl-switch\config\installer.ps1
 
 ## Run
 
-To enable the service `$service` on `hostname`, you'll need to type the following command :
+To enable the service `$service` on `$hostname`, you'll need to type the following command :
 
 ```
 switch-wsl $service $hostname
