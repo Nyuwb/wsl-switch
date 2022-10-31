@@ -19,13 +19,14 @@ Install-Module Powershell-YAML -Scope CurrentUser
 
 ## Installation
 
-Clone this repository, then you have to edit the content of the `config.yaml` file.
+Clone this repository, then you have to edit the content of the `config.yaml` file to adapt to your configuration.
 
-By default for the `instances`, we're using the name of two Ubuntu instances but the `key` can be the word you wants.
-The `hostname` should be the name of the distribution name on WSL.
+By default for the `instances`, we're using the same value as the hostname, but the `key` can be the word you wants.
+
+The `hostname` parameter should be the name of the distribution name on WSL.
 
 Then, you'll need to execute the `installer.ps1` file to generate all the aliases and to make the configuration working.
-After that, you'll need to include your `$Profile` file as he's now storing all aliases and functions for this application.
+After that, you'll need to include your `$Profile` file as he will store all aliases and functions for this application.
 
 ```
 path_to\wsl-switch\config\installer.ps1
@@ -39,6 +40,8 @@ To enable the service `$service` on `hostname`, you'll need to type the followin
 ```
 switch-wsl $service $hostname
 ```
+
+The `$hostname` parameter is the `key` stored in the `config.yaml`.
 
 To make it easier to use, a list of aliases are created and is available below.
 
