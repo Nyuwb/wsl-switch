@@ -25,7 +25,7 @@ Class Installer
 
 		# Updating the alias-list content in the profile file
 		Add-Content -Path $ConfigFile -Value '#WSLSwitch'
-		Add-Content -Path $ConfigFile -Value ('Set-Alias switch-wsl '+ $Config.ProjectPath +'app.ps1')
+		Add-Content -Path $ConfigFile -Value ('Set-Alias switch-wsl '+ $Config.ProjectPath +'\app.ps1')
 		Add-Content -Path $ConfigFile -Value $AliasContent
 		Add-Content -Path $ConfigFile -Value '#WSLSwitchEnd'
 	}
