@@ -10,15 +10,18 @@ The following services are managed :
 
 ## Requirements
 
+You need to install the Powershell-YAML module to get this app to work.
+We don't need to install it globally so we're using the `CurrentUser` scope.
+
 ```
-Install-Module Powershell-YAML
+Install-Module Powershell-YAML -Scope CurrentUser
 ```
 
-## Configuration
+## Installation
 
-Before anything else, you'll need to edit the content of the `config.yaml` file.
+Clone this repository, then you have to edit the content of the `config.yaml` file.
 
-By default, we're using the name of two Ubuntu instances, but the `key` can be the word you wants.
+By default for the `instances`, we're using the name of two Ubuntu instances but the `key` can be the word you wants.
 The `hostname` should be the name of the distribution name on WSL.
 
 Then, you'll need to execute the `installer.ps1` file to generate all the aliases and to make the configuration working.
