@@ -1,6 +1,4 @@
-
 Using Module '..\Utils\Console.psm1'
-Import-Module Powershell-Yaml
 
 Class Loader
 {

@@ -1,6 +1,7 @@
 Using Module '.\src\Config\Loader.psm1'
 Using Module '.\src\Utils\Command.psm1'
 Using Module '.\src\Utils\Console.psm1'
+Import-Module Powershell-Yaml
 
 # Configuration loader
 $Config = [Loader]::New()
