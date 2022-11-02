@@ -5,6 +5,7 @@ Class Loader
 	[System.Object] $Instances
 	[String] $ProjectPath
 	[Array] $Services
+	[String] $Version = '0.3'
 
 	Loader()
 	{
@@ -37,5 +38,10 @@ Class Loader
 			}
 		}
 		Return $Instance
+	}
+
+	[String] GetVersion()
+	{
+		Return $This.Version
 	}
 }
