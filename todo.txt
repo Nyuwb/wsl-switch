@@ -1,0 +1,8 @@
+- app.ps1 -> wsl-switch.ps1
+- Gérer commande installation / configuration (ouvre fichier notepad vers fichier de configuration)
+
+wsl-switch config
+wsl-switch version
+wsl-switch php,apache focal
+
+- Check wslctl

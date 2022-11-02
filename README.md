@@ -19,7 +19,13 @@ Install-Module Powershell-YAML -Scope CurrentUser
 
 ## Installation
 
-Clone this repository, then you have to edit the content of the `config.yaml` file to adapt to your configuration.
+### With Scoop
+
+### TODO
+
+Clone this repository : `git clone https://github.com/Nyuwb/wsl-switch`
+
+Then edit the content of the `config.yaml` file to adapt to your configuration.
 
 By default for the `instances`, we're using the same value as the hostname, but the `key` can be the word you wants.
 
