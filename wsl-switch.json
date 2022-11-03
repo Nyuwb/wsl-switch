@@ -4,7 +4,7 @@
     "homepage": "https://github.com/Nyuwb/wsl-switch/",
     "license": "MIT license",
     "url": "https://github.com/Nyuwb/wsl-switch/releases/download/v0.5/wsl-switch-v0.5.zip",
-    "hash": "20c0d954121cfbbee8a12ded008a7079cd9bd423f3ccb200e397ff4b51ce94c3",
+    "hash": "83497a31cce3555b828cc7bd47f503414eefd4147f87b10acf24a525a5b2ed18",
     "bin": "wsl-switch.ps1",
     "persist": [
 		"config.json"
