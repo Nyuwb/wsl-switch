@@ -26,7 +26,12 @@ To uninstall it, simply use `scoop uninstall wsl-switch`
 
 Clone this repository : `git clone https://github.com/Nyuwb/wsl-switch'
 
-Add the path to the cloned repository directly on your environment.
+Add the path to the local repository on your Powershell profile :
+
+```
+Invoke-Item $Profile
+# Set-Alias wsl-switch _path_to_repository_\wsl-switch.ps1
+```
 
 ## Edit the configuration file
 
@@ -36,7 +41,7 @@ You need to run the following command to edit the configuration file.
 wsl-switch config
 ```
 
-Save it, and if will direcly be used by the application.
+Save it, and it will direcly be used by the application.
 
 ## Run the application
 
