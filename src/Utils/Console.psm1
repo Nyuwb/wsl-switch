@@ -1,16 +1,16 @@
 Class Console
 {
-	Static Write($Message)
+	[Void] Static Write([String] $Message)
 	{
 		Write-Host $Message
 	}
 
-	Static WriteError($Message)
+	[Void] Static WriteError([String] $Message)
 	{
 		Write-Host $Message -ForegroundColor 'Red'
 	}
 
-	Static WriteSuccess($Message)
+	[Void] Static WriteSuccess([String] $Message)
 	{
 		Write-Host $Message -ForegroundColor 'Green'
 	}

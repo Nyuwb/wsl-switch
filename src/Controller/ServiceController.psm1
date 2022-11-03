@@ -1,32 +1,28 @@
+Using Module '..\Config\Loader.psm1'
+Using Module '..\Utils\Command.psm1'
+
 Class ServiceController
 {
-	Static Install($Config, $ConfigFile)
+	[Void] Static Call([Loader] $Config, [String] $Hostname, [String] $ServiceList)
 	{
-		# Checking if the project path is reachable
-		if ((Test-Path -Path $Config.ProjectPath) -eq $False) {
-			[Console]::WriteError('The ProjectPath in the configuration file is not reachable')
-			Exit
+		# Getting instance list config (which should be activated and deactivated)
+		$InstanceList = @{
+			'start' = $Config.GetByInstanceName($Hostname)
+			'stop' = $Config.GetOtherInstanceThan($Hostname)
 		}
 
-		# Checking if the configuration file path exists, if not create it
-		if ((Test-Path -Path $ConfigFile) -eq $False) {
-			New-Item -Path $ConfigFile -Type 'File' -Force
+		# Verifying the two instances config
+		If ($InstanceList['start'].GetType() -eq $null -or $InstanceList['stop'] -eq $null) {
+			Throw 'The instance list configuration didn''t load properly'
 		}
 
-		# Loading the alias list
-		$AliasContent = Get-Content ($Config.ProjectPath +'\config\alias-list.txt')
-
-		# Removing the old alias-list content of the configuration file
-		$Content = Get-Content -Path $ConfigFile -Raw
-		If ($Content.Length -gt 0) {
-			$Content = $Content -Replace '(\#WSLSwitch)[\S\s]+(\#WSLSwitchEND)', ''
-			Set-Content -Path $ConfigFile -Value $Content.Trim()
+		# Execution of the WSL commands
+		'stop', 'start' | Foreach-Object {
+			$Action = $_
+			[Console]::Write($(If ($Action -eq 'stop') { 'Dea' } else { 'A' }) +'ctivation of the services on the instance '+ $InstanceList[$Action].GetHostname() +"...`n")
+			$ServiceList -Split ',' | ForEach-Object {
+				[Command]::Execute($InstanceList[$Action].GetHostname(), $InstanceList[$Action].GetService($_), $Action)
+			}
 		}
-
-		# Updating the alias-list content in the profile file
-		Add-Content -Path $ConfigFile -Value '#WSLSwitch'
-		Add-Content -Path $ConfigFile -Value ('Set-Alias switch-wsl '+ $Config.ProjectPath +'\app.ps1')
-		Add-Content -Path $ConfigFile -Value $AliasContent
-		Add-Content -Path $ConfigFile -Value '#WSLSwitchEnd'
 	}
 }

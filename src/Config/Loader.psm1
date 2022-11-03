@@ -1,10 +1,10 @@
 Using Module '..\Controller\ConfigController.psm1'
+Using Module '..\Entity\Instance.psm1'
 Using Module '..\Utils\Console.psm1'
 
 Class Loader
 {
-	[System.Object] $Instances
-	[String] $ProjectPath
+	[Hashtable] $Instances = @{}
 	[Array] $Services
 	[String] $Version = '0.3'
 
@@ -16,21 +16,21 @@ Class Loader
 		$Config = Get-Content ($RootPath +'\config.json') -Raw | ConvertFrom-JSON
 		# Saving the configuration in the current class
 		$This.Services = $Config.Services
-		$This.Instances = $Config.Instances
-		$This.ProjectPath = $RootPath
+		$This.SetInstances($Config.Instances)
 	}
 
-	[System.Object] GetInstances()
+	# Checking if an instance name exists
+	[Boolean] InstanceExists([String] $InstanceName)
 	{
-		Return $This.Instances
+		Return ($This.GetInstances().Keys -Contains $InstanceName)
 	}
 
-	[System.Object] GetByInstanceName($InstanceName)
+	[System.Object] GetByInstanceName([String] $InstanceName)
 	{
 		Return $This.GetInstances()[$InstanceName]
 	}
 
-	[System.Object] GetOtherInstanceThan($InstanceName)
+	[System.Object] GetOtherInstanceThan([String] $InstanceName)
 	{
 		$Instance = $null
 		$This.GetInstances().Keys | Foreach-Object {
@@ -39,6 +39,47 @@ Class Loader
 			}
 		}
 		Return $Instance
+	}
+
+	# Associate every service together to generate a string that will be used as a regex for the command
+	[String] FormatServicesToString()
+	{
+		$ServiceList = New-Object System.Collections.Generic.List[System.Object]
+		For ($i = 0; $i -lt $This.Services.Length; $i++) {
+			$ServiceList.Add($This.Services[$i])
+			# Getting associated service list
+			If ($i -ne $This.Services.Length -1) {
+				$SubServiceList = New-Object System.Collections.Generic.List[System.Object]
+				$SubServiceList.Add($This.Services[$i])
+				For ($j = ($i + 1); $j -lt $This.Services.Length; $j++) {
+					$ServiceList.Add($This.Services[$i] +','+ $This.Services[$j])
+					$SubServiceList.Add($This.Services[$j])
+				}
+				$ServiceList.Add($SubServiceList.ToArray() -Join ',')
+			}
+		}
+		$ServicesArray = $ServiceList.ToArray() | Select -Unique
+		Return ($ServicesArray -Join '|')
+	}
+	
+	# Setter list
+	[Void] SetInstances($InstanceList)
+	{
+		$InstanceList.PSObject.Properties | Foreach-Object {
+			$Instance = [Instance]::New($_.Name, $_.Value.Hostname, $_.Value.Services)
+			$This.Instances[$_.Name] = $Instance
+		}
+	}
+
+	# Getter list
+	[Hashtable] GetInstances()
+	{
+		Return $This.Instances
+	}
+
+	[System.Object] GetServices()
+	{
+		Return $This.Services
 	}
 
 	[String] GetVersion()
