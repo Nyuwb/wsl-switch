@@ -24,7 +24,7 @@ To uninstall it, simply use `scoop uninstall wsl-switch`
 
 ### From GitHub
 
-Clone this repository : `git clone https://github.com/Nyuwb/wsl-switch'
+Clone this repository : `git clone https://github.com/Nyuwb/wsl-switch`
 
 Add the path to the local repository on your Powershell profile :
 
