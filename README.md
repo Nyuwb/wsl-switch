@@ -46,7 +46,7 @@ Save it, and it will direcly be used by the application.
 
 ## Run the application
 
-To enable the service `$service` on `hostname`, you'll need to type the following command :
+To enable the service `$service` on `$hostname`, you'll need to type the following command :
 
 ```
 wsl-switch $service $hostname
