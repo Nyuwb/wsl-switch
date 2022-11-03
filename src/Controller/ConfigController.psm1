@@ -56,7 +56,7 @@ Class ConfigController
 				}
 			}
 		}
-		If ($InstanceLength -ne 2) {
+		If ($InstanceLength -le 1) {
 			Throw 'The instances property is invalid in the configuration'
 		}
 	}
