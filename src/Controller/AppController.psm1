@@ -26,7 +26,6 @@ Class AppController
 					[Console]::Write("Usage: wsl-switch [command] [optionnal arguments]`n")
 					[Console]::Write("Global commands:")
 					[Console]::Write("   config`t`tOpen the configuration file")
-					[Console]::Write("   config-update`tUpdate the configuration file content in the application")
 					[Console]::Write("   help`t`t`tShow this message")
 					[Console]::Write("   version`t`tShow the application version")
 					[Console]::Write("`nService switch, enable the service on the entered instance name and disable it on the other one:")

@@ -1,0 +1,10 @@
+{
+    "version": "0.3",
+    "description": "Switch WSL service activation from an host to another",
+    "homepage": "https://github.com/Nyuwb/wsl-switch/",
+    "license": "MIT license",
+    "url": "https://github.com/Nyuwb/wsl-switch/archive/refs/tags/v0.2.zip",
+    "hash": "a7bae922b9df0fc2a552798eed2d31458c684b47",
+    "bin": "wsl-switch.ps1",
+    "persist": "config.json"
+}

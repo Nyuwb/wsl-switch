@@ -12,11 +12,11 @@ The following services are currently managed, but you can custom it in the `conf
 
 ### From Scoop
 
-Enable the bucket `xxx`.
-Then type the following command to install :
+Add the bucket `scoop-srsrns`.
+Then install it directly from this bucket :
 
 ```
-scoop add bucket xxx
+scoop bucket add srsrns https://github.com/mbl-35/scoop-srsrns
 scoop install wsl-switch
 ```
 
