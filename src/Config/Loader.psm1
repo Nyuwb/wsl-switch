@@ -6,14 +6,16 @@ Class Loader
 {
 	[Hashtable] $Instances = @{}
 	[Array] $Services
-	[String] $Version = '0.4'
+	[String] $Version = '0.5'
+	[String] $Path
 
 	Loader()
 	{
 		# Get the root path
 		$RootPath = (Get-Item $PSScriptRoot).Parent.Parent.FullName
+		$This.Path = $RootPath +'\config.json'
 		# Load of the configuration
-		$Config = Get-Content ($RootPath +'\config.json') -Raw | ConvertFrom-JSON
+		$Config = Get-Content $This.Path -Raw | ConvertFrom-JSON
 		# Saving the configuration in the current class
 		$This.Services = $Config.Services
 		$This.SetInstances($Config.Instances)

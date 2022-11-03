@@ -24,7 +24,7 @@ Class AppController
 				'^config$' {
 					# Opening config.yaml with the default editor
 					[Console]::Write('Opening config.json...')
-					Invoke-Item 'config.json'
+					Invoke-Item $Config.Path
 				}
 				'^help$' {
 					# Display the command list
