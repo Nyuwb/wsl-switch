@@ -12,7 +12,7 @@ The following services are currently managed, but you can custom it in the `conf
 
 ### From Scoop
 
-Add the bucket `scoop-srsrns`.
+Add the bucket `scoop-srsrns`.  
 Then install it directly from this bucket :
 
 ```
@@ -41,6 +41,7 @@ You need to run the following command to edit the configuration file.
 wsl-switch config
 ```
 
+It will open the `config.json` file that you can edit.  
 Save it, and it will direcly be used by the application.
 
 ## Run the application
