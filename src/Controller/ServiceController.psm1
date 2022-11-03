@@ -8,20 +8,19 @@ Class ServiceController
 		# Getting instance list config (which should be activated and deactivated)
 		$InstanceList = @{
 			'start' = $Config.GetByInstanceName($Hostname)
-			'stop' = $Config.GetOtherInstanceThan($Hostname)
-		}
-
-		# Verifying the two instances config
-		If ($InstanceList['start'].GetType() -eq $null -or $InstanceList['stop'] -eq $null) {
-			Throw 'The instance list configuration didn''t load properly'
+			'stop' = $Config.GetOtherInstancesThan($Hostname)
 		}
 
 		# Execution of the WSL commands
 		'stop', 'start' | Foreach-Object {
 			$Action = $_
-			[Console]::Write($(If ($Action -eq 'stop') { 'Dea' } else { 'A' }) +'ctivation of the services on the instance '+ $InstanceList[$Action].GetHostname() +"...`n")
-			$ServiceList -Split ',' | ForEach-Object {
-				[Command]::Execute($InstanceList[$Action].GetHostname(), $InstanceList[$Action].GetService($_), $Action)
+			$InstanceList[$Action] | Foreach-Object {
+				$Instance = $_
+				[Console]::Write($(If ($Action -eq 'stop') { 'Dea' } else { 'A' }) +'ctivation of the services on the instance '+ $Instance.GetHostname() +"...`n")
+				$ServiceList -Split ',' | ForEach-Object {
+					$Service = $_
+					[Command]::Execute($Instance.GetHostname(), $Instance.GetService($Service), $Action)
+				}
 			}
 		}
 	}

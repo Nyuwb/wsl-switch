@@ -6,7 +6,7 @@ Class Loader
 {
 	[Hashtable] $Instances = @{}
 	[Array] $Services
-	[String] $Version = '0.3'
+	[String] $Version = '0.4'
 
 	Loader()
 	{
@@ -25,20 +25,20 @@ Class Loader
 		Return ($This.GetInstances().Keys -Contains $InstanceName)
 	}
 
-	[System.Object] GetByInstanceName([String] $InstanceName)
+	[Instance] GetByInstanceName([String] $InstanceName)
 	{
 		Return $This.GetInstances()[$InstanceName]
 	}
 
-	[System.Object] GetOtherInstanceThan([String] $InstanceName)
+	[System.Collections.ArrayList] GetOtherInstancesThan([String] $InstanceName)
 	{
-		$Instance = $null
+		$InstanceList = [System.Collections.ArrayList]::New()
 		$This.GetInstances().Keys | Foreach-Object {
 			If ($_ -ne $InstanceName) {
-				$Instance = $This.GetByInstanceName($_)
+				$InstanceList.Add($This.GetByInstanceName($_))
 			}
 		}
-		Return $Instance
+		Return $InstanceList
 	}
 
 	# Associate every service together to generate a string that will be used as a regex for the command
