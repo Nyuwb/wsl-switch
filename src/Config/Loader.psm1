@@ -1,3 +1,4 @@
+Using Module '..\Controller\ConfigController.psm1'
 Using Module '..\Utils\Console.psm1'
 
 Class Loader
@@ -12,7 +13,7 @@ Class Loader
 		# Get the root path
 		$RootPath = (Get-Item $PSScriptRoot).Parent.Parent.FullName
 		# Load of the configuration
-		$Config = Get-Content ($RootPath +'\config.yaml') | ConvertFrom-YAML
+		$Config = Get-Content ($RootPath +'\config.json') -Raw | ConvertFrom-JSON
 		# Saving the configuration in the current class
 		$This.Services = $Config.Services
 		$This.Instances = $Config.Instances

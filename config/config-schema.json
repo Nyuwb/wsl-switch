@@ -1,0 +1,95 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+	  "services": {
+		"type": "array",
+		"items": [
+		  {
+			"type": "string"
+		  },
+		  {
+			"type": "string"
+		  },
+		  {
+			"type": "string"
+		  }
+		]
+	  },
+	  "instances": {
+		"type": "object",
+		"properties": {
+		  "trusty": {
+			"type": "object",
+			"properties": {
+			  "hostname": {
+				"type": "string"
+			  },
+			  "services": {
+				"type": "object",
+				"properties": {
+				  "apache": {
+					"type": "string"
+				  },
+				  "mysql": {
+					"type": "string"
+				  },
+				  "php": {
+					"type": "string"
+				  }
+				},
+				"required": [
+				  "apache",
+				  "mysql",
+				  "php"
+				]
+			  }
+			},
+			"required": [
+			  "hostname",
+			  "services"
+			]
+		  },
+		  "focal": {
+			"type": "object",
+			"properties": {
+			  "hostname": {
+				"type": "string"
+			  },
+			  "services": {
+				"type": "object",
+				"properties": {
+				  "apache": {
+					"type": "string"
+				  },
+				  "mysql": {
+					"type": "string"
+				  },
+				  "php": {
+					"type": "string"
+				  }
+				},
+				"required": [
+				  "apache",
+				  "mysql",
+				  "php"
+				]
+			  }
+			},
+			"required": [
+			  "hostname",
+			  "services"
+			]
+		  }
+		},
+		"required": [
+		  "trusty",
+		  "focal"
+		]
+	  }
+	},
+	"required": [
+	  "services",
+	  "instances"
+	]
+  }

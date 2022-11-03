@@ -3,11 +3,8 @@ Using Module '.\src\Controller\AppController.psm1'
 Using Module '.\src\Utils\Console.psm1'
 Import-Module Powershell-Yaml
 
-# Configuration loader
-$Config = [Loader]::New()
-
 # Starting application
-[AppController]::New($Config).Run($Args)
+[AppController]::Run($Args)
 
 Exit
 
