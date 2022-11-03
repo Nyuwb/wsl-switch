@@ -30,17 +30,18 @@ Class AppController
 					# Display the command list
 					[Console]::Write("Usage: wsl-switch [command] [optional arguments]`n")
 					[Console]::Write("Global commands:")
-					[Console]::Write("   config`t`tOpen the configuration file")
-					[Console]::Write("   help`t`t`tShow this message")
-					[Console]::Write("   instances`t`tShow the instance list")
-					[Console]::Write("   services`t`tShow the service list")
-					[Console]::Write("   version`t`tShow the application version")
+					[Console]::Write("   config`t`t`tOpen the configuration file")
+					[Console]::Write("   help`t`t`t`thow this message")
+					[Console]::Write("   instances`t`t`tShow the instance list")
+					[Console]::Write("   services`t`t`tShow the service list")
+					[Console]::Write("   version`t`t`tShow the application version")
 					[Console]::Write("`nService switch, enable the service on the entered instance name and disable it on the other one:")
-					[Console]::Write("   apache foo`t`tActivate apache on foo")
-					[Console]::Write("   mysql bar`t`tActivate mysql on bar")
-					[Console]::Write("   php baz`t`tActivate php on baz`n")
+					[Console]::Write("   apache foo`t`t`tActivate apache on foo")
+					[Console]::Write("   mysql bar`t`t`tActivate mysql on bar")
+					[Console]::Write("   php baz`t`t`tActivate php on baz`n")
 					[Console]::Write("The services can be written comma-separated to enable them together, for example :")
-					[Console]::Write("   apache,php foo`tActivate apache and php on foo`n")
+					[Console]::Write("   apache,php foo`t`tActivate apache and php on foo")
+					[Console]::Write("   apache,mysql,php bar`t`tActivate apache, mysql and php on bar`n")
 				}
 				'^instances$' {
 					# Display the available instance list
