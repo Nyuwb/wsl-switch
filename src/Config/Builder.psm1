@@ -6,6 +6,7 @@ Class Builder
 		# Config
 		$Version = '0.6'
 		$AppFile = $RootPath +'\wsl-switch.ps1'
+		$ScoopJsonFile = $RootPath +'\wsl-switch.json'
 
 		# Dependencies
 		$Dependencies = @(
@@ -50,13 +51,13 @@ Class Builder
 
 		# Generating wsl-switch.json content
 		$Url = 'https://github.com/Nyuwb/wsl-switch/releases/download/v'+ $Version +'/wsl-switch-v'+ $Version +'.zip'
-		$ScoopJson = @{
+		$ScoopJson = [Ordered] @{
 			'version' = $Version
 			'description' = 'Switch WSL service activation from an host to another'
 			'homepage' = 'https://github.com/Nyuwb/wsl-switch/'
 			'license' = 'Apache-2.0'
 			'url' = $Url
-			'hash' = (Get-FileHash $ReleaseFile -Algorithm SHA256).Hash
+			'hash' = (Get-FileHash $ReleaseFile -Algorithm SHA256).Hash.ToLower()
 			'bin' = 'wsl-switch.ps1'
 			'persist' = 'config.json'
 			'checkver' = 'github'
@@ -66,7 +67,7 @@ Class Builder
 		}
 
 		# Updating the file content
-		$File = Get-Item -Path ($RootPath +'\wsl-switch.json')
-		Add-Content $AppFile ($ScoopJson | ConvertTo-Json)
+		New-Item -ItemType File -Path $ScoopJsonFile -Force | Out-Null
+		Add-Content $ScoopJsonFile ($ScoopJson | ConvertTo-Json)
 	}
 }
