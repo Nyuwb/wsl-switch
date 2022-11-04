@@ -3,15 +3,38 @@ Using Module '..\Entity\Service.psm1'
 
 Class Command
 {
-	[Void] Static Execute([String] $Hostname, [Service] $Service, [String] $Action)
+	[Void] Static Start([String] $Hostname, [Service] $Service)
 	{
 		# Execution of the command
-		wsl -d $Hostname sudo service $Service.GetProcess() $Action 2>&1 | Out-Null
+		wsl -d $Hostname sudo service $Service.GetProcess() start 2>&1 | Out-Null
 		# Checking the command status
 		if ( $? ) {
-			[Console]::WriteSuccess('The service '+ $Service.GetName() +' has been '+ $(If ($Action -eq 'stop') { 'stopped' } else { 'started' }))
+			[Console]::WriteSuccess('The service '+ $Service.GetName() +' has been started')
 		} Else {
-			[Console]::WriteError($(If ($Action -eq 'stop') { 'Stopping' } else { 'Starting' }) +' the service '+ $Service +' has encountered an error')
+			[Console]::WriteError('Starting the service '+ $Service.GetName() +' has encountered an error')
 		}
+	}
+
+	[Void] Static Stop([String] $Hostname, [Service] $Service)
+	{
+		# Execution of the command
+		wsl -d $Hostname sudo service $Service.GetProcess() stop 2>&1 | Out-Null
+		# Checking the command status
+		if ( $? ) {
+			[Console]::WriteSuccess('The service '+ $Service.GetName() +' has been stopped')
+		} Else {
+			[Console]::WriteError('Stopping the service '+ $Service.GetName() +' has encountered an error')
+		}
+	}
+
+	[Boolean] Static IsRunning([String] $Hostname, [Service] $Service)
+	{
+		# Execution of the command
+		$Status = wsl -d $Hostname sudo service $Service.GetProcess() status 2>&1
+		Write-Debug $Status
+		if ( $? -And $Status -NotMatch 'not') {
+			Return $True
+		}
+		Return $False
 	}
 }
