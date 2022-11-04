@@ -28,7 +28,15 @@ To uninstall it, simply use `scoop uninstall wsl-switch`
 
 Clone this repository: `git clone https://github.com/Nyuwb/wsl-switch`
 
-Add the path to the local repository on your Powershell profile:
+Build the app to create the `wsl-switch.ps1` single file:
+
+```
+_path_to_repository_\app.ps1 build
+```
+
+<sub>We're doing this to avoid the limitation of `Using module` in Powershell</sub>
+
+After that, add the path to the builded file in your Powershell profile:
 
 ```
 Invoke-Item $Profile

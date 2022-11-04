@@ -17,7 +17,7 @@ Class Builder
 			'src\Entity\Service.psm1',
 			'src\Utils\Command.psm1',
 			'src\Utils\Console.psm1',
-			'run.ps1'
+			'app.ps1'
     	)
 
 		# Building
