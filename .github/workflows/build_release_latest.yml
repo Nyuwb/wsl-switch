@@ -1,0 +1,103 @@
+name: build-release-latest
+
+on:
+  push:
+    tags-ignore: 'v*'
+    branches: '**'
+  # Enables the possibility to trigger the workflow manually
+  workflow_dispatch:
+
+jobs:
+<
+  test_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Setting up required powershell modules
+      - name: Set required PowerShell modules
+        id: psmodulecache
+        uses: potatoqualitee/psmodulecache@v3.5
+        with:
+          #modules-to-cache: Pester, PSScriptAnalyzer , InvokeBuild
+          modules-to-cache: Pester, PSScriptAnalyzer
+          shell: pwsh
+
+        # Setting up the powershell module cache
+      - name: Setup PowerShell module cache
+        id: cacher
+        uses: actions/cache@v2
+        with:
+            path: ${{ steps.psmodulecache.outputs.modulepath }}
+            key: ${{ steps.psmodulecache.outputs.keygen }}
+
+        # Installing the required powershell module, if not cached
+      - name: Install required PowerShell modules
+        if: steps.cacher.outputs.cache-hit != 'true'
+        uses: potatoqualitee/psmodulecache@v3.5
+        with:
+          shell: pwsh
+
+      - name: Invoke PSScriptAnalyzer & Pester Tests
+        shell: pwsh
+        #run: pwsh -command "Invoke-Build -File ./.build.ps1 -Configuration 'Test' -ciMode"
+        run: pwsh -command "./make.ps1 qa-tests-ci"
+
+
+  build_release:
+    runs-on: windows-latest
+    needs: test_release
+    steps:
+      - uses: actions/checkout@v2
+
+      # # Setting up required powershell modules
+      # - name: Set required PowerShell modules
+      #   id: psmodulecachebuild
+      #   uses: potatoqualitee/psmodulecache@v3.5
+      #   with:
+      #     modules-to-cache: InvokeBuild, Ps2exe
+      #     shell: powershell
+
+      # # Setting up the powershell module cache
+      # - name: Setup PowerShell module cache
+      #   id: cacher
+      #   uses: actions/cache@v2
+      #   with:
+      #       path: ${{ steps.psmodulecachebuild.outputs.modulepath }}
+      #       key: ${{ steps.psmodulecachebuild.outputs.keygen }}
+
+      # # Installing the required powershell module, if not cached
+      # - name: Install required PowerShell modules
+      #   if: steps.cacher.outputs.cache-hit != 'true'
+      #   uses: potatoqualitee/psmodulecache@v3.5
+      #   with:
+      #     shell: powershell
+
+      - name: Building Application
+        shell: powershell
+        #run: powershell -command "Invoke-Build -File ./.build.ps1 -Configuration 'Release' -ciMode"
+        run: powershell -command "./make.ps1 release-ci"
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: |
+            build/dist/*.zip
+          retention-days: 1
+          if-no-files-found: error
+
+
+  github-release:
+    runs-on: ubuntu-latest
+    needs: [ build_release ]
+    steps:
+      - uses: actions/download-artifact@v2
+      - run: cd artifact && md5sum *wslctl* > md5sums.txt
+      - run: cd artifact && sha256sum *wslctl* > sha256sums.txt
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          body_path: CHANGELOG.md
+          files: |
+            artifact/*
