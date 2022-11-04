@@ -1,5 +1,6 @@
 Using Module '.\ConfigController.psm1'
 Using Module '.\ServiceController.psm1'
+Using Module '..\Config\Builder.psm1'
 Using Module '..\Config\Loader.psm1'
 Using Module '..\Utils\Console.psm1'
 
@@ -8,7 +9,7 @@ Class AppController
 	[Void] Static Run([String[]] $Arguments)
 	{
 		Try {
-			# Veryfying arguments
+			# Verifying arguments
 			If ($Arguments.Length -eq 0) {
 				Throw 'Missing command'
 			}
@@ -21,6 +22,13 @@ Class AppController
 			$Regex = '^('+ $Config.FormatServicesToString() +')$'
 			# Getting command from first argument
 			Switch -Regex ($Command) {
+				'^build$' {
+					# Building app in single file (to avoid Powershell "Using module" problems)
+					if (-Not ('Builder' -as [Type])) {
+						Throw 'The builder is only available outside of the builded ps1 file'
+					}
+					('Builder' -as [Type])::Build((Get-Item $PSScriptRoot).Parent.Parent.FullName)
+				}
 				'^config$' {
 					# Opening config.yaml with the default editor
 					[Console]::Write('Opening config.json...')
