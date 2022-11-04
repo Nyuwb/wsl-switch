@@ -31,7 +31,7 @@ Class AppController
 					[Console]::Write("Usage: wsl-switch [command] [optional arguments]`n")
 					[Console]::Write("Global commands:")
 					[Console]::Write("   config`t`t`tOpen the configuration file")
-					[Console]::Write("   help`t`t`t`thow this message")
+					[Console]::Write("   help`t`t`t`tShow this message")
 					[Console]::Write("   instances`t`t`tShow the instance list")
 					[Console]::Write("   services`t`t`tShow the service list")
 					[Console]::Write("   version`t`t`tShow the application version")
