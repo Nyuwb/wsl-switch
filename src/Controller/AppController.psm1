@@ -39,7 +39,7 @@ Class AppController
 					[Console]::Write("   apache foo`t`t`tActivate apache on foo")
 					[Console]::Write("   mysql bar`t`t`tActivate mysql on bar")
 					[Console]::Write("   php baz`t`t`tActivate php on baz`n")
-					[Console]::Write("The services can be written comma-separated to enable them together, for example :")
+					[Console]::Write("The services can be written comma-separated to enable them together, for example:")
 					[Console]::Write("   apache,php foo`t`tActivate apache and php on foo")
 					[Console]::Write("   apache,mysql,php bar`t`tActivate apache, mysql and php on bar`n")
 				}
