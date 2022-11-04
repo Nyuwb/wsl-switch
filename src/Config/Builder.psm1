@@ -42,5 +42,8 @@ Class Builder
 		# Inserting in file
 		New-Item -ItemType File -Path $AppFile -Force | Out-Null
 		Add-Content $AppFile $Content
+
+		# Updating wsl-switch.json
+		# TODO - Generating the file from @{} should be okay... need to see !
 	}
 }
