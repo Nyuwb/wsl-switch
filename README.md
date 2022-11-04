@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/license-Apache2.0-orange.svg?style=flat-square)](LICENSE)
+
 # WSL Switch
 
 Allows you to switch the activation of certain services from one WSL instance to another.
