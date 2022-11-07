@@ -4,7 +4,7 @@ Class Builder
 	[Void] Static Build([String] $RootPath)
 	{
 		# Config
-		$Version = '0.6'
+		$Version = '0.6' # TODO - Get from git tag directly !
 		$AppFile = $RootPath +'\wsl-switch.ps1'
 		$ScoopJsonFile = $RootPath +'\wsl-switch.json'
 
