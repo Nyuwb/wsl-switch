@@ -1,10 +1,9 @@
 
 Class Builder
 {
-	[Void] Static Build([String] $RootPath)
+	[Void] Static Build([String] $RootPath, [String] $Version)
 	{
 		# Config
-		$Version = '0.6' # TODO - Get from git tag directly !
 		$AppFile = $RootPath +'\wsl-switch.ps1'
 		$ScoopJsonFile = $RootPath +'\wsl-switch.json'
 
@@ -37,9 +36,6 @@ Class Builder
 			}
 			$Content += "`n"
 		}
-
-		# Updating version
-		$Content = $Content.Replace('{{ version }}', $Version)
 
 		# Inserting in file
 		New-Item -ItemType File -Path $AppFile -Force | Out-Null

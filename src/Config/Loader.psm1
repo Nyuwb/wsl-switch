@@ -6,7 +6,6 @@ Class Loader
 {
 	[Hashtable] $Instances = @{}
 	[Array] $Services
-	[String] $Version = '{{ version }}'
 	[String] $Path
 
 	Loader()
