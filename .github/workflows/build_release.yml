@@ -13,11 +13,13 @@ jobs:
         uses: actions/checkout@v2
       - name: Step 2 - Build Application
         shell: pwsh
-        run: pwsh ./app.ps1 build
+        run: |
+          mkdir build
+          pwsh ./app.ps1 build
       - name: Step 3 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
-          path: ./wsl-switch-v*.zip
+          path: build/wsl-switch-v*.zip
           if-no-files-found: error
   github-release:
     runs-on: ubuntu-latest
@@ -29,7 +31,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
-          prerelease: true
+          prerelease: false
+          draft: false
           body_path: CHANGELOG.md
           files: |
             artifact/*
