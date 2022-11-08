@@ -1,15 +1,15 @@
-v0.6:
+# v0.6
 
 - Adding an app builder through GitHub Actions (CI)
 - Adding status command, to show the status of each services
 - Fixing command regex to work with all possible combinations
 
-v0.5:
+# v0.5
 
 - Fixing scoop install by @Nyuwb in [#6](https://github.com/Nyuwb/wsl-switch/pull/6)
 - Adding support for more than two instances by @Nyuwb in [#5](https://github.com/Nyuwb/wsl-switch/pull/5)
 
-v0.3:
+# v0.3
 
 - Adding Scoop support
 - Complete rewrite of the code
