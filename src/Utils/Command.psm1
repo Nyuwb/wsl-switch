@@ -1,4 +1,5 @@
 Using Module '.\Console.psm1'
+Using Module '..\Entity\Instance.psm1'
 Using Module '..\Entity\Service.psm1'
 
 Class Command
@@ -27,12 +28,11 @@ Class Command
 		}
 	}
 
-	[Boolean] Static IsRunning([String] $Hostname, [Service] $Service)
+	[Boolean] Static IsRunning([Instance] $Instance, [String] $ServiceName)
 	{
 		# Execution of the command
-		$Status = wsl -d $Hostname sudo service $Service.GetProcess() status 2>&1
-		Write-Debug $Status
-		if ( $? -And $Status -NotMatch 'not') {
+		$Status = wsl -d $Instance.GetHostname() sudo service $Instance.GetService($ServiceName).GetProcess() status 2>&1
+		if ($? -And $Status -NotMatch 'is not running' -And $status -NotMatch 'is stopped') {
 			Return $True
 		}
 		Return $False

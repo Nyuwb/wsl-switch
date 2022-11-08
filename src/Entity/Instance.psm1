@@ -38,7 +38,7 @@ Class Instance
 		Return $This.Services
 	}
 
-	[System.Object] GetService($Service)
+	[Service] GetService([String] $Service)
 	{
 		Return $This.Services[$Service]
 	}

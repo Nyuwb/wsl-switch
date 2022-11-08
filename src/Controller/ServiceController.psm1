@@ -1,5 +1,6 @@
 Using Module '..\Config\Loader.psm1'
 Using Module '..\Utils\Command.psm1'
+Using Module '..\Utils\Console.psm1'
 
 Class ServiceController
 {
@@ -33,6 +34,20 @@ Class ServiceController
 		# Getting service list
 		$ServiceList = $Config.GetServices()
 
-		# TODO
+		# Getting each service status
+		$ServiceStatusList = @{}
+		ForEach ($ServiceName in $ServiceList) {
+			[Console]::WriteNNL("Status for service '"+ $ServiceName +"':`t")
+			ForEach ($Instance in $InstanceList.GetEnumerator()) {
+				# Getting status of the service for this instance
+				$Result = [Command]::IsRunning($Instance.Value, $ServiceName)
+				If ($Result -eq $True) {
+					[Console]::WriteSuccessNNL($Instance.Value.GetId() +' ')
+				} Else {
+					[Console]::WriteErrorNNL($Instance.Value.GetId() +' ')
+				}
+			}
+			[Console]::Write('')
+		}
 	}
 }
