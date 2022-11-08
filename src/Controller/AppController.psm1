@@ -7,7 +7,7 @@ Using Module '..\Utils\Console.psm1'
 
 Class AppController
 {
-	[String] $Version = '0.6'
+	Static [String] $Version = '0.6'
 
 	[Void] Static Run([String[]] $Arguments)
 	{
@@ -30,7 +30,11 @@ Class AppController
 					if (-Not ('Builder' -as [Type])) {
 						Throw 'The builder is only available outside of the builded ps1 file'
 					}
-					('Builder' -as [Type])::Build((Get-Item $PSScriptRoot).Parent.Parent.FullName, $This.Version)
+					('Builder' -as [Type])::Build((Get-Item $PSScriptRoot).Parent.Parent.FullName, [AppController]::Version)
+				}
+				'^build-version$' {
+					# Returning the version only, only used for the build
+					Write-Host ('v'+ [AppController]::Version)
 				}
 				'^config$' {
 					# Opening config.yaml with the default editor
@@ -55,7 +59,7 @@ Class AppController
 				}
 				'^version$' {
 					# Showing the app version
-					[Console]::Write('wsl-switch version '+ $This.Version)
+					[Console]::Write('wsl-switch version '+ [AppController]::Version)
 				}
 				$Regex {
 					# Checking instance name
