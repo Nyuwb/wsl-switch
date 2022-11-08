@@ -37,14 +37,15 @@ Class ServiceController
 		# Getting each service status
 		$ServiceStatusList = @{}
 		ForEach ($ServiceName in $ServiceList) {
-			[Console]::WriteNNL("Status for service '"+ $ServiceName +"':`t")
+			[Console]::Write("Status for service '"+ $ServiceName +"':")
 			ForEach ($Instance in $InstanceList.GetEnumerator()) {
 				# Getting status of the service for this instance
 				$Result = [Command]::IsRunning($Instance.Value, $ServiceName)
+				[Console]::WriteNNL('  ')
 				If ($Result -eq $True) {
-					[Console]::WriteSuccessNNL($Instance.Value.GetId() +' ')
+					[Console]::WriteSuccessNNL($Instance.Value.GetId())
 				} Else {
-					[Console]::WriteErrorNNL($Instance.Value.GetId() +' ')
+					[Console]::WriteErrorNNL($Instance.Value.GetId())
 				}
 			}
 			[Console]::Write('')
