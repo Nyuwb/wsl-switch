@@ -46,19 +46,18 @@ Class Loader
 	# Associate every service together to generate a string that will be used as a regex for the command
 	[String] FormatServicesToString()
 	{
-		$ServiceList = New-Object System.Collections.Generic.List[System.Object]
+		$ServiceList = New-Object System.Collections.ArrayList
 		For ($i = 0; $i -lt $This.Services.Length; $i++) {
-			$ServiceList.Add($This.Services[$i])
-			# Getting associated service list
-			If ($i -ne $This.Services.Length -1) {
-				$SubServiceList = New-Object System.Collections.Generic.List[System.Object]
-				$SubServiceList.Add($This.Services[$i])
-				For ($j = ($i + 1); $j -lt $This.Services.Length; $j++) {
+			$SubServiceList = New-Object System.Collections.ArrayList
+			for ($j = 0; $j -lt $This.Services.Length; $j++) {
+				if ($This.Services[$i] -ne $This.Services[$j]) {
 					$ServiceList.Add($This.Services[$i] +','+ $This.Services[$j])
-					$SubServiceList.Add($This.Services[$j])
 				}
-				$ServiceList.Add($SubServiceList.ToArray() -Join ',')
+				$SubServiceList.Add($This.Services[$j])
 			}
+			$ServiceList.Add($SubServiceList.ToArray() -Join ',')
+			# Permuting elements in array...
+			$This.Services = $This.Services[1..($This.Services.Length - 1)] + $This.Services[0]
 		}
 		$ServicesArray = $ServiceList.ToArray() | Select -Unique
 		Return ($ServicesArray -Join '|')
