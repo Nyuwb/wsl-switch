@@ -46,15 +46,14 @@ Class Loader
 	[String] FormatServicesToString()
 	{
 		$ServiceList = New-Object System.Collections.ArrayList
+		$ServiceList.Add($This.Services -Join '|')
 		For ($i = 0; $i -lt $This.Services.Length; $i++) {
-			$SubServiceList = New-Object System.Collections.ArrayList
 			for ($j = 0; $j -lt $This.Services.Length; $j++) {
 				if ($This.Services[$i] -ne $This.Services[$j]) {
 					$ServiceList.Add($This.Services[$i] +','+ $This.Services[$j])
 				}
-				$SubServiceList.Add($This.Services[$j])
 			}
-			$ServiceList.Add($SubServiceList.ToArray() -Join ',')
+			$ServiceList.Add($This.Services -Join ',')
 			# Permuting elements in array...
 			$This.Services = $This.Services[1..($This.Services.Length - 1)] + $This.Services[0]
 		}
