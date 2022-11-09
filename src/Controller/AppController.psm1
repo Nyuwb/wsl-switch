@@ -23,8 +23,6 @@ Class AppController
 			$Command = ($Arguments[0] -Split ' ') -Join ','
 			# Generating regex for the services
 			$Regex = '^('+ $Config.FormatServicesToString() +')$'
-			Write-Debug $Regex
-			Exit
 			# Getting command from first argument
 			Switch -Regex ($Command) {
 				'^build$' {
