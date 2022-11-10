@@ -24,15 +24,12 @@ jobs:
     needs: [ build-release ]
     steps:
       - uses: actions/checkout@v3
-      - name: Extract version to create Release
-        run: echo "version=$( pwsh ./wsl-switch.ps1 version )" >> $GITHUB_OUTPUT
-        id: version
       - uses: actions/download-artifact@v3
       - run: cd artifact && sha256sum wsl-switch-v*.zip > sha256sums.txt
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ steps.version.outputs.version }}
+          automatic_release_tag: ${{ github.ref_name }}
           prerelease: false
           draft: false
           files: |
