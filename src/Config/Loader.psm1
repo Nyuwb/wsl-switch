@@ -11,8 +11,7 @@ Class Loader
 	Loader()
 	{
 		# Get the root path
-		$RootPath = (Get-Item $PSScriptRoot).Parent.Parent.FullName
-		$This.Path = $RootPath +'\config.json'
+		$This.Path = $Env:RootPath +'\config.json'
 		# Load of the configuration
 		$Config = Get-Content $This.Path -Raw | ConvertFrom-JSON
 		# Saving the configuration in the current class

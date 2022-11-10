@@ -2,7 +2,7 @@ Class ConfigController
 {
 	Static CheckConfigurationFile()
 	{
-		$ConfigFile = (Get-Item $PSScriptRoot).Parent.Parent.FullName +'\config.json'
+		$ConfigFile = $Env:RootPath +'\config.json'
 		# Checking if the configuration file
 		if ((Test-Path -Path $ConfigFile) -eq $False) {
 			Throw 'The configuration file ''config.json'' has not been found, please reinstall the application'

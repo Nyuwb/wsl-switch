@@ -7,7 +7,7 @@ Using Module '..\Utils\Console.psm1'
 
 Class AppController
 {
-	Static [String] $Version = '0.6.0'
+	Static [String] $Version = '0.6.1'
 
 	[Void] Static Run([String[]] $Arguments)
 	{
@@ -27,7 +27,7 @@ Class AppController
 			Switch -Regex ($Command) {
 				'^build$' {
 					# Building app in single file (to avoid Powershell "Using module" problems)
-					if (-Not ('Builder' -as [Type])) {
+					if ([AppController]::IsBuildedApp() -eq $True) {
 						Throw 'The builder is only available outside of the builded ps1 file'
 					}
 					('Builder' -as [Type])::Build((Get-Item $PSScriptRoot).Parent.Parent.FullName, [AppController]::Version)
@@ -78,5 +78,10 @@ Class AppController
 			[Console]::WriteError('Error: '+ $_)
 			Exit
 		}
+	}
+
+	[String] Static IsBuildedApp()
+	{
+		Return (Get-PSCallStack | Select-Object -First 1 -ExpandProperty 'ScriptName') -Match 'wsl-switch.ps1'
 	}
 }
