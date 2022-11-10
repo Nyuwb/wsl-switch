@@ -7,7 +7,7 @@ Using Module '..\Utils\Console.psm1'
 
 Class AppController
 {
-	Static [String] $Version = '0.6'
+	Static [String] $Version = '0.6.0'
 
 	[Void] Static Run([String[]] $Arguments)
 	{

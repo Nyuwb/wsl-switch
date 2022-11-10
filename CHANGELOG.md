@@ -1,4 +1,4 @@
-# v0.6
+# v0.6.0
 
 - Adding an app builder through GitHub Actions (CI)
 - Adding status command, to show the status of each services
