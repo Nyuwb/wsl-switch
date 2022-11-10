@@ -1,3 +1,7 @@
+# v0.6.1
+
+- Fixed loading of config.json in the builded app
+
 # v0.6.0
 
 - Adding an app builder through GitHub Actions (CI)
