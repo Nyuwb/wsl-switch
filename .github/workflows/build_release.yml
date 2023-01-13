@@ -26,11 +26,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
       - run: cd artifact && sha256sum wsl-switch-v*.zip > sha256sums.txt
-      - uses: marvinpinto/action-automatic-releases@latest
+      - uses: softprops/action-gh-release@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ github.ref_name }}
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          tag_name: ${{ steps.version.outputs.version }}
           prerelease: false
           draft: false
+          body_path: CHANGELOG.md
           files: |
             artifact/*
