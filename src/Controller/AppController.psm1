@@ -7,7 +7,7 @@ Using Module '..\Utils\Console.psm1'
 
 Class AppController
 {
-	Static [String] $Version = '0.6.1'
+	Static [String] $Version = '0.7.0'
 
 	[Void] Static Run([String[]] $Arguments)
 	{
@@ -25,6 +25,15 @@ Class AppController
 			$Regex = '^('+ $Config.FormatServicesToString() +')$'
 			# Getting command from first argument
 			Switch -Regex ($Command) {
+				'^all$' {
+					# Checking instance name
+					$InstanceName = $Arguments[1]
+					If ($Config.InstanceExists($InstanceName) -ne $True) {
+						Throw ('The instance '''+ $InstanceName +''' doesn''t exist')
+					}
+					# Execute
+					[ServiceController]::Execute($Config, $InstanceName, $Config.GetServices() -Join ',')
+				}
 				'^build$' {
 					# Building app in single file (to avoid Powershell "Using module" problems)
 					if ([AppController]::IsBuildedApp() -eq $True) {

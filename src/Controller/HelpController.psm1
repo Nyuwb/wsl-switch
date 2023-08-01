@@ -18,6 +18,6 @@ Class HelpController
 		[Console]::Write("   php baz`t`t`tActivate php on baz`n")
 		[Console]::Write("The services can be written comma-separated to enable them together, for example:")
 		[Console]::Write("   apache,php foo`t`tActivate apache and php on foo")
-		[Console]::Write("   apache,mysql,php bar`t`tActivate apache, mysql and php on bar`n")
+		[Console]::Write("   all bar`t`tActivate all services on bar`n")
 	}
 }

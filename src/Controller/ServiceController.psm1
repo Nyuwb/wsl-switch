@@ -17,7 +17,7 @@ Class ServiceController
 			$Action = $_
 			$InstanceList[$Action] | Foreach-Object {
 				$Instance = $_
-				[Console]::Write($(If ($Action -eq 'Stop') { 'Dea' } else { 'A' }) +'ctivation of the services on the instance '+ $Instance.GetHostname() +"...`n")
+				[Console]::Write($(If ($Action -eq 'Stop') { 'Dea' } else { 'A' }) +'ctivation of the services on the instance '+ $Instance.GetHostname() +"...")
 				$ServiceList -Split ',' | ForEach-Object {
 					$Service = $_
 					[Command]::$Action($Instance.GetHostname(), $Instance.GetService($Service))

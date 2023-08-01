@@ -1,3 +1,8 @@
+# v0.7.0
+
+- Added a "all" parameter to switch all configured services at once
+- Fixed an unintended new line when switching services
+
 # v0.6.1
 
 - Fixed loading of config.json in the builded app
