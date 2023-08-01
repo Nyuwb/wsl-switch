@@ -1,3 +1,8 @@
+# v0.7.1
+- Added a new verification in WSL on the instance hostname
+- Optimized the code for the "all" parameter
+- Fixed **help** output
+
 # v0.7.0
 
 - Added a "all" parameter to switch all configured services at once

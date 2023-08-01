@@ -1,5 +1,6 @@
 Using Module '.\ConfigController.psm1'
 Using Module '.\HelpController.psm1'
+Using Module '.\InstanceController.psm1'
 Using Module '.\ServiceController.psm1'
 Using Module '..\Config\Builder.psm1'
 Using Module '..\Config\Loader.psm1'
@@ -26,12 +27,7 @@ Class AppController
 			# Getting command from first argument
 			Switch -Regex ($Command) {
 				'^all$' {
-					# Checking instance name
-					$InstanceName = $Arguments[1]
-					If ($Config.InstanceExists($InstanceName) -ne $True) {
-						Throw ('The instance '''+ $InstanceName +''' doesn''t exist')
-					}
-					# Execute
+					$InstanceName = [InstanceController]::Exists($Config, $Arguments[1])	
 					[ServiceController]::Execute($Config, $InstanceName, $Config.GetServices() -Join ',')
 				}
 				'^build$' {
@@ -71,12 +67,8 @@ Class AppController
 					[Console]::Write('wsl-switch version '+ [AppController]::Version)
 				}
 				$Regex {
-					# Checking instance name
-					$InstanceName = $Arguments[1]
-					If ($Config.InstanceExists($InstanceName) -ne $True) {
-						Throw ('The instance '''+ $InstanceName +''' doesn''t exist')
-					}
-					# Execute
+					# Execute the switch command
+					$InstanceName = [InstanceController]::Exists($Arguments[1])
 					[ServiceController]::Execute($Config, $InstanceName, $Command)
 				}
 				Default {

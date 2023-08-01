@@ -1,6 +1,6 @@
 Class ConfigController
 {
-	Static CheckConfigurationFile()
+	[Void] Static CheckConfigurationFile()
 	{
 		$ConfigFile = $Env:RootPath +'\config.json'
 		# Checking if the configuration file
@@ -46,7 +46,13 @@ Class ConfigController
 			$InstanceName = $_.Name
 			# Checking the hostname
 			If ($_.Value.Hostname -eq $null) {
-				Throw 'Hostname invalid for the instance '''+ $InstanceName +''''
+				Throw 'The hostname is missing for the instance '''+ $InstanceName +''''
+			}
+			# Checking the instance hostname in WSL
+			$Hostname = $_.Value.Hostname
+			$InstanceWSL = wsl -l | Where { $_.Replace("`0", '') -match $Hostname }
+			If ($InstanceWSL.Length -eq 0) {
+				Throw 'The hostname ''' + $Hostname + ''' is not existing in WSL for the instance '''+ $InstanceName +''''
 			}
 			# Checking the service list
 			$InstanceServices = $_.Value.Services.PSObject.Properties.Name
