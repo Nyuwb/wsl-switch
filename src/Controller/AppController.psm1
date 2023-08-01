@@ -20,6 +20,10 @@ Class AppController
 			# Checking the configuration file
 			[ConfigController]::CheckConfigurationFile()
 			$Config = [Loader]::New()
+			# Checking WSL only when builded
+			if ([AppController]::IsBuildedApp() -eq $True) {
+				[ConfigController]::CheckWSL($Config.GetInstances())
+			}
 			# Generating command
 			$Command = ($Arguments[0] -Split ' ') -Join ','
 			# Generating regex for the services
