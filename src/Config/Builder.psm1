@@ -13,6 +13,7 @@ Class Builder
 			'src\Controller\AppController.psm1',
 			'src\Controller\ConfigController.psm1',
 			'src\Controller\HelpController.psm1',
+			'src\Controller\InstanceController.psm1',
 			'src\Controller\ServiceController.psm1',
 			'src\Entity\Instance.psm1',
 			'src\Entity\Service.psm1',

@@ -1,3 +1,5 @@
+Using Module '.\AppController.psm1'
+
 Class ConfigController
 {
 	[Void] Static CheckConfigurationFile()
@@ -49,10 +51,12 @@ Class ConfigController
 				Throw 'The hostname is missing for the instance '''+ $InstanceName +''''
 			}
 			# Checking the instance hostname in WSL
-			$Hostname = $_.Value.Hostname
-			$InstanceWSL = wsl -l | Where { $_.Replace("`0", '') -match $Hostname }
-			If ($InstanceWSL.Length -eq 0) {
-				Throw 'The hostname ''' + $Hostname + ''' is not existing in WSL for the instance '''+ $InstanceName +''''
+			if ([AppController]::IsBuildedApp() -eq $False) {
+				$Hostname = $_.Value.Hostname
+				$InstanceWSL = wsl -l | Where { $_.Replace("`0", '') -match $Hostname }
+				If ($InstanceWSL.Length -eq 0) {
+					Throw 'The hostname ''' + $Hostname + ''' is not existing in WSL for the instance '''+ $InstanceName +''''
+				}
 			}
 			# Checking the service list
 			$InstanceServices = $_.Value.Services.PSObject.Properties.Name
