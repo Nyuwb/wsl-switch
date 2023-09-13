@@ -72,7 +72,7 @@ Class AppController
 				}
 				$Regex {
 					# Execute the switch command
-					$InstanceName = [InstanceController]::Exists($Arguments[1])
+					$InstanceName = [InstanceController]::Exists($Config, $Arguments[1])
 					[ServiceController]::Execute($Config, $InstanceName, $Command)
 				}
 				Default {
