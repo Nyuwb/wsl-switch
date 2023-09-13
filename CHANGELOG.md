@@ -1,4 +1,9 @@
+# v.0.7.2
+
+- fixed: Error when trying to switch one service by @Nyuwb [#7](https://github.com/Nyuwb/wsl-switch/issues/7)
+
 # v0.7.1
+
 - Added a new verification in WSL on the instance hostname
 - Optimized the code for the "all" parameter
 - Fixed **help** output
