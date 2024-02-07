@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/license-Apache2.0-orange.svg?style=flat-square)](LICENSE) [![Publish release on GitHub](https://github.com/Nyuwb/wsl-switch/actions/workflows/build_release.yml/badge.svg)](https://github.com/Nyuwb/wsl-switch/actions/workflows/build_release.yml)
+[![License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square)](LICENSE) [![Publish release on GitHub](https://github.com/Nyuwb/wsl-switch/actions/workflows/build_release.yml/badge.svg)](https://github.com/Nyuwb/wsl-switch/actions/workflows/build_release.yml)
 
 # WSL Switch
 
